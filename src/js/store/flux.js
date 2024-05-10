@@ -1,3 +1,5 @@
+import contactOperationDispatcher from "./contactOperationDispatcher";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
@@ -12,6 +14,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
+			],
+			contacts : [
+
 			]
 		},
 		actions: {
@@ -37,6 +42,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			updateContactList: async () => {
+				const contacts = await contactOperationDispatcher.get();
+				const store = getStore();
+				setStore({...store, contacts});
+			},
+			addContact: (name, phone, email, address) => {
+				const contact = {name: name,
+					phone: phone,
+					email: email,
+					address: address};
+				contactOperationDispatcher.post(contact);
 			}
 		}
 	};
