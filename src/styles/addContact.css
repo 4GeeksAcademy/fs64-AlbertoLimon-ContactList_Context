@@ -1,0 +1,10 @@
+.formulario{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-label{
+    text-align: left;
+}

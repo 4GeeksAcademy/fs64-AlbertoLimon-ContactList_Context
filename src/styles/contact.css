@@ -1,0 +1,17 @@
+.contact{
+    display: flex;
+}
+.row{
+    padding: 1.5rem;
+    
+}
+.imgContact{
+    width: 70%;
+    text-align: center;
+}
+.iconPencil{
+    margin-left: 2rem;
+}
+.iconTrash{
+    margin-left: 2rem;
+}
