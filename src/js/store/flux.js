@@ -45,15 +45,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			updateContactList: async () => {
 				const contacts = await contactOperationDispatcher.get();
+				console.log("Contactos ",contacts)
 				const store = getStore();
 				setStore({...store, contacts});
 			},
-			addContact: (name, phone, email, address) => {
+			addContact: async (name, phone, email, address) => {
 				const contact = {name: name,
 					phone: phone,
 					email: email,
 					address: address};
+					console.log(contact)
 				contactOperationDispatcher.post(contact);
+			},
+			deleteContact: async (id) => {
+				await contactOperationDispatcher.delete(id);
 			}
 		}
 	};

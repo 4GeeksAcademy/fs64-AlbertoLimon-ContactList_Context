@@ -8,25 +8,32 @@ import { FaTrashAlt } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
+import { ContactCard } from "../component/contactCard";
 
 
 export const ContactList = () => {
 	const { store, actions} = useContext(Context);
 
     const navigate = useNavigate();
-    /*
+    
 	useEffect (() => {
+        
 		actions.updateContactList();
 	}, [])
-*/
+
 
 	return (
 	<>
         <div className="container">
-            <h2 className="text-center">Contact-List</h2>
-            <button className="btn btn-success text-end" onClick={navigate('/addContact')}>Add new contact</button>
+            <div className="">
+                <h2 className="text-center">Contact-List</h2>
+                <button className="btn btn-success d-flex justify-content-end" onClick={() => navigate('/addContact')}>Add new contact</button>
+            </div>
             
                 <div className="contacts">
+                    {store.contacts.map((contact, index) => (
+                        <ContactCard contact={contact} key={index}/>
+                    ))}
                     <div className="row">
                         <div className="col-2">
                             <img className="imgContact" src="https://img.freepik.com/fotos-premium/hombre-cara-circulo-palabra-hombre_798164-934.jpg" alt=""/>

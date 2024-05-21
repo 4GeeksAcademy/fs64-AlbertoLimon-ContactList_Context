@@ -10,13 +10,37 @@ import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 
 
-export const ContactCard = ({contact}) => {
+export const ContactCard = ({contact, key}) => {
+
+    const {store,actions} = useContext(Context)
+
+    const ModalDelete = (id) => {
+        return(
+            <>
+                <div class="modal" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Are you sure?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>If you delete this thing the universe will go down!.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Oh No</button>
+                                <button type="button" class="btn btn-primary" onClick={() => actions.deleteContact(id)}>Yes baby</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )
+    }
 
     return (
         <>
             <div className="container">
-                <h2 className="text-center">Contact-List</h2>
-                <button className="btn btn-success text-end" onClick={navigate('/addContact')}>Add new contact</button>
                 
                     <div className="contacts">
                         <div className="row">
@@ -25,16 +49,16 @@ export const ContactCard = ({contact}) => {
                             </div>
                             <div className="col-7">
                                 
-                                <h4>Mike aaaaaaaa</h4>
+                                <h4>{contact.name}</h4>
                                 <div className="d-flex flex-column">
-                                    <span><FaLocationDot /> direccion</span>
-                                    <span><FaPhone />  numero</span>
-                                    <span><MdEmail /> correo</span>
+                                    <span><FaLocationDot /> {contact.address}</span>
+                                    <span><FaPhone />  {contact.phone}</span>
+                                    <span><MdEmail /> {contact.email}</span>
                                 </div>
                                 
                             </div>
                             <div className="col-3">
-                                <FaPencilAlt className="iconPencil"/>
+                                <FaPencilAlt className="iconPencil" onClick={() => {return (ModalDelete(contact.id))}}/>
                                 <FaTrashAlt className="iconTrash"/>
     
                             </div>
