@@ -1,20 +1,21 @@
 const contactOperationDispatcher = {
     get : async () => {
-        const response = await fetch('http://playground.4geeks.com/contact/agendas/agendaAlberto/contacts', {
+        const response = await fetch('https://playground.4geeks.com/contact/agendas/agendaAlberto/contacts', {
             method: 'GET',
             headers: {
                 'Content-Type':'application/json'
             }
         })
         if(response.ok){
-            return await response.json();
+            const data = await response.json();
+            return data;
         }else{
             console.log("Error al cargar los contactos");
         }
     },
 
     post : async (contact) => {
-        const response = await fetch('http://playground.4geeks.com/contact/agendas/agendaAlberto/contacts', {
+        const response = await fetch('https://playground.4geeks.com/contact/agendas/agendaAlberto/contacts', {
             method: "POST",
             body: JSON.stringify({
               "name": contact.name, "phone": contact.phone, "email": contact.email, "address": contact.address
@@ -32,7 +33,7 @@ const contactOperationDispatcher = {
 
     delete : async (id) => {
         
-        const response = await fetch(`http://playground.4geeks.com/contact/agendas/agendaAlberto/contacts/${id}`, {
+        const response = await fetch(`https://playground.4geeks.com/contact/agendas/agendaAlberto/contacts/${id}`, {
             method: 'DELETE',
         });
         if (response.ok) {

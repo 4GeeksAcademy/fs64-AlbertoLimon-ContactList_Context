@@ -44,10 +44,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 			updateContactList: async () => {
-				const contacts = await contactOperationDispatcher.get();
-				console.log("Contactos ",contacts)
+				const data = await contactOperationDispatcher.get();
+				console.log("Contactos ",data)
 				const store = getStore();
-				setStore({...store, contacts});
+				setStore({...store, contacts: data.contacts});
 			},
 			addContact: async (name, phone, email, address) => {
 				const contact = {name: name,

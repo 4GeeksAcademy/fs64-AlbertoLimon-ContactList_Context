@@ -17,7 +17,6 @@ export const ContactList = () => {
     const navigate = useNavigate();
     
 	useEffect (() => {
-        
 		actions.updateContactList();
 	}, [])
 
@@ -34,26 +33,6 @@ export const ContactList = () => {
                     {store.contacts.map((contact, index) => (
                         <ContactCard contact={contact} key={index}/>
                     ))}
-                    <div className="row">
-                        <div className="col-2">
-                            <img className="imgContact" src="https://img.freepik.com/fotos-premium/hombre-cara-circulo-palabra-hombre_798164-934.jpg" alt=""/>
-                        </div>
-                        <div className="col-7">
-                            
-                            <h4>Mike aaaaaaaa</h4>
-                            <div className="d-flex flex-column">
-                                <span><FaLocationDot /> direccion</span>
-                                <span><FaPhone />  numero</span>
-                                <span><MdEmail /> correo</span>
-                            </div>
-                            
-                        </div>
-                        <div className="col-3">
-                            <FaPencilAlt className="iconPencil"/>
-                            <FaTrashAlt className="iconTrash"/>
-
-                        </div>
-                    </div>
                 </div>
         </div>
     </>

@@ -1,41 +1,50 @@
 import { useContext } from "react";
 import { Context } from "../store/appContext";
 import '../../styles/contact.css'
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 
-export const ContactCard = ({contact, key}) => {
+export const ContactCard = ({contact}) => {
 
     const {store,actions} = useContext(Context)
 
     const ModalDelete = (id) => {
-        return(
+
+        const [show, setShow] = useState(false);
+
+        const handleClose = () => setShow(false);
+        const handleShow = () => setShow(true);
+
+        return (
             <>
-                <div class="modal" tabindex="-1">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Are you sure?</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p>If you delete this thing the universe will go down!.</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Oh No</button>
-                                <button type="button" class="btn btn-primary" onClick={() => actions.deleteContact(id)}>Yes baby</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Button variant="primary" onClick={handleShow}>
+                    Launch demo modal
+                </Button>
+
+                <Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Are you sure?</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>If you delete this thing the universe will go down!</Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Oh No
+                    </Button>
+                    <Button variant="primary" onClick={handleClose && actions.deleteContact(id)}>
+                        Yes baby
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
             </>
-        )
+        );
     }
 
     return (
@@ -58,8 +67,8 @@ export const ContactCard = ({contact, key}) => {
                                 
                             </div>
                             <div className="col-3">
-                                <FaPencilAlt className="iconPencil" onClick={() => {return (ModalDelete(contact.id))}}/>
-                                <FaTrashAlt className="iconTrash"/>
+                                <FaPencilAlt className="iconPencil" />
+                                <FaTrashAlt className="iconTrash" onClick={() => {ModalDelete(contact.id)}}/>
     
                             </div>
                         </div>
