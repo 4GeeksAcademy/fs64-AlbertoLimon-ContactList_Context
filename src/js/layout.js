@@ -11,6 +11,7 @@ import injectContext, { Context } from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { UpdateContactForm } from "./views/updateContact";
 
 //create your first component
 
@@ -30,6 +31,7 @@ const Layout = () => {
 						<Route path="/single/:theid" element={<Single />} />
 						<Route path="/contacts" element={<ContactList />} />
 						<Route path="/addContact" element={<CreateContactForm />} />
+						<Route path="/updateContact" element={<UpdateContactForm />} />
 					</Routes>
 					<Footer />
 				</ScrollToTop>

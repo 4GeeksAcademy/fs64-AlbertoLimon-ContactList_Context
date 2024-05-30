@@ -5,9 +5,11 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import '../../styles/addContact.css';
 
-export const CreateContactForm = () => {
+export const UpdateContactForm = (contact) => {
 
 	const {store,actions} = useContext(Context)
+
+    console.log(contact)
 
 	const [inputName, setInputName] = useState("");
 	const [inputPhone, setInputPhone] = useState("");
@@ -38,11 +40,10 @@ export const CreateContactForm = () => {
 					<input type="text" className="form-control w-50 mb-3" id="addressInput" placeholder="Enter address" onChange={(event) => setInputAddress(event.target.value)}
 							value={inputAddress}/>
 	
-					<button type="submit" className="btn btn-primary w-50 mb-3" onClick={() => actions.addContact(inputName,inputPhone,inputEmail,inputAddress)}>Save</button>
+					<button type="submit" className="btn btn-primary w-50 mb-3" onClick={() => actions.updateContact(contact.id,inputName,inputPhone,inputEmail,inputAddress)}>Save</button>
 					<a onClick={() => navigate('/contacts')} >or get back to contacts</a>
 				</form>
 		</div>
 		</>
 	)
 }
-

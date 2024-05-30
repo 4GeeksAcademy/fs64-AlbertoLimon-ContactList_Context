@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 import '../../styles/contact.css'
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaPhone } from "react-icons/fa";
@@ -10,42 +10,44 @@ import { MdEmail } from "react-icons/md";
 import { FaLocationDot } from "react-icons/fa6";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { UpdateContactForm } from "../views/updateContact";
 
+const ModalDelete = (id) => {
 
-export const ContactCard = ({contact}) => {
+    const [show, setShow] = useState(false);
 
-    const {store,actions} = useContext(Context)
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-    const ModalDelete = (id) => {
+    return (
+        <>
+            <Button variant="primary" onClick={handleShow}>
+                Launch demo modal
+            </Button>
 
-        const [show, setShow] = useState(false);
-
-        const handleClose = () => setShow(false);
-        const handleShow = () => setShow(true);
-
-        return (
-            <>
-                <Button variant="primary" onClick={handleShow}>
-                    Launch demo modal
-                </Button>
-
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
                     <Modal.Title>Are you sure?</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>If you delete this thing the universe will go down!</Modal.Body>
-                    <Modal.Footer>
+                </Modal.Header>
+                <Modal.Body>If you delete this thing the universe will go down!</Modal.Body>
+                <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Oh No
                     </Button>
                     <Button variant="primary" onClick={handleClose && actions.deleteContact(id)}>
                         Yes baby
                     </Button>
-                    </Modal.Footer>
-                </Modal>
-            </>
-        );
-    }
+                </Modal.Footer>
+            </Modal>
+        </>
+    );
+}
+
+export const ContactCard = ({contact}) => {
+
+    const {store,actions} = useContext(Context)
+
+    const navigate = useNavigate();
 
     return (
         <>
@@ -66,8 +68,8 @@ export const ContactCard = ({contact}) => {
                                 </div>
                                 
                             </div>
-                            <div className="col-3">
-                                <FaPencilAlt className="iconPencil" />
+                            <div className="col-2">
+                                <FaPencilAlt className="iconPencil" onClick={() => {return(<UpdateContactForm contact={contact} />)}} />
                                 <FaTrashAlt className="iconTrash" onClick={() => {ModalDelete(contact.id)}}/>
     
                             </div>

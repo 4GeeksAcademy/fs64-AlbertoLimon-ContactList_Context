@@ -59,6 +59,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			deleteContact: async (id) => {
 				await contactOperationDispatcher.delete(id);
+			},
+			updateContact: async (id, name, phone, email, address) => {
+				const updatedContact = {name: name,
+					phone: phone,
+					email: email,
+					address: address};
+				contactOperationDispatcher.update(id,updatedContact)
 			}
 		}
 	};

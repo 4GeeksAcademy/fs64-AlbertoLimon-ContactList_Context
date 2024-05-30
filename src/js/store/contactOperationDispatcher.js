@@ -44,6 +44,24 @@ const contactOperationDispatcher = {
            
         }
         
+    },
+
+    update: async (id, contact) => {
+
+        const response = await fetch(`https://playground.4geeks.com/contact/agendas/agendaAlberto/contacts/${id}`, {
+            method: 'PUT',
+            body: JSON.stringify({
+                "name": contact.name, "phone": contact.phone, "email": contact.email, "address": contact.address
+              }),
+              headers: {
+                "Content-Type": "application/json"
+              }
+        })
+        if(response.ok){
+            console.log("Contacto actualizado");
+        }else{
+            console.log("Error al actualizar el usuario")
+        }
     }
     
 }
