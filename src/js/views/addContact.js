@@ -38,7 +38,7 @@ export const CreateContactForm = () => {
 					<input type="text" className="form-control w-50 mb-3" id="addressInput" placeholder="Enter address" onChange={(event) => setInputAddress(event.target.value)}
 							value={inputAddress}/>
 	
-					<button type="submit" className="btn btn-primary w-50 mb-3" onClick={() => actions.addContact(inputName,inputPhone,inputEmail,inputAddress)}>Save</button>
+					<button type="submit" className="btn btn-primary w-50 mb-3" onClick={() => actions.addContact(inputName,inputPhone,inputEmail,inputAddress) && navigate('/')}>Save</button>
 					<a onClick={() => navigate('/contacts')} >or get back to contacts</a>
 				</form>
 		</div>

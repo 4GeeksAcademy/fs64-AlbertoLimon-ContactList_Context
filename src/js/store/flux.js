@@ -50,15 +50,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({...store, contacts: data.contacts});
 			},
 			addContact: async (name, phone, email, address) => {
+
 				const contact = {name: name,
 					phone: phone,
 					email: email,
 					address: address};
 					console.log(contact)
 				contactOperationDispatcher.post(contact);
+				await getActions().updateContactList()
 			},
 			deleteContact: async (id) => {
 				await contactOperationDispatcher.delete(id);
+				await getActions().updateContactList() //Para volver a mostrar los contactos actualizados
 			},
 			updateContact: async (id, name, phone, email, address) => {
 				const updatedContact = {name: name,
